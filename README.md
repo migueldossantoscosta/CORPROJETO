@@ -42,9 +42,9 @@ app/
 
 ├── kotlin+java/
 
-│   └── com.example.corp/
+│   └── com.example.corprojeto/
 
-│       ├── ColorPickerScreen.kt
+│       ├── COR.kt
 
 │       ├── MainActivity.kt
 
