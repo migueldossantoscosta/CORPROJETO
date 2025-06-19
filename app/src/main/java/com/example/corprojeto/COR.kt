@@ -11,11 +11,14 @@ import androidx.compose.foundation.layout.*
 @Composable
 fun COR (){
     Image(
+        //Carrega a imagem
         painter = painterResource(id = R.drawable.color_wheel),
+        //Descreve a imagem (IMPORTANTE)
         contentDescription = "Roda com Cores",
+        //Define o tamanho e a posição da imagem
         modifier = Modifier
-            .fillMaxWidth()
-            .height(300.dp),
+            .fillMaxWidth() //Ocupa a largura disponivel
+            .height(300.dp), //Fixa a altura da imagem em 300dp
         contentScale = ContentScale.Fit
     )
 }
