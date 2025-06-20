@@ -29,39 +29,45 @@ fun COR (){
     val bitmap = Imagem.asAndroidBitmap()
     var CodigoCor by remember { mutableStateOf("#FFFFFF") }
 
-    Image(
-        //Carrega a imagem
-        bitmap = Imagem,
-        //Descreve a imagem (IMPORTANTE)
-        contentDescription = "Roda com Cores",
-        //Define o tamanho e a posição da imagem
+    Column(
         modifier = Modifier
-            .fillMaxWidth() //Ocupa a largura disponivel
-            .height(300.dp) //Fixa a altura da imagem em 300dp
-            .onGloballyPositioned { coordinates -> TamanhoImagem = coordinates.size }
-            .pointerInteropFilter {event ->
-                val xRatio = event.x / TamanhoImagem.width.toFloat()
-                val yRatio = event.y / TamanhoImagem.height.toFloat()
+            .fillMaxSize()
+            .padding(20.dp)
+    ) {
+        Image(
+            //Carrega a imagem
+            bitmap = Imagem,
+            //Descreve a imagem (IMPORTANTE)
+            contentDescription = "Roda com Cores",
+            //Define o tamanho e a posição da imagem
+            modifier = Modifier
+                .fillMaxWidth() //Ocupa a largura disponivel
+                .height(300.dp) //Fixa a altura da imagem em 300dp
+                .onGloballyPositioned { coordinates -> TamanhoImagem = coordinates.size }
+                .pointerInteropFilter { event ->
+                    val xRatio = event.x / TamanhoImagem.width.toFloat()
+                    val yRatio = event.y / TamanhoImagem.height.toFloat()
 
-                val xBitmap = (xRatio * bitmap.width).toInt()
-                val yBitmap = (yRatio * bitmap.height).toInt()
+                    val xBitmap = (xRatio * bitmap.width).toInt()
+                    val yBitmap = (yRatio * bitmap.height).toInt()
 
-                if (xBitmap in 0 until bitmap.width && yBitmap in 0 until bitmap.height)  {
-                    val pixel = bitmap.getPixel(xBitmap, yBitmap)
-                    val Novacor = Color(pixel)
-                    CorEscolhida = Novacor
-                    CodigoCor = String.format("#%06X", 0xFFFFFF and pixel)
-                }
-                true
-            },
+                    if (xBitmap in 0 until bitmap.width && yBitmap in 0 until bitmap.height) {
+                        val pixel = bitmap.getPixel(xBitmap, yBitmap)
+                        val Novacor = Color(pixel)
+                        CorEscolhida = Novacor
+                        CodigoCor = String.format("#%06X", 0xFFFFFF and pixel)
+                    }
+                    true
+                },
 
-        contentScale = ContentScale.Fit
-    )
+            contentScale = ContentScale.Fit
+        )
 
-    Box(
-        modifier = Modifier
-            .size(100.dp)
-            .background(CorEscolhida)
-    )
-}
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(CorEscolhida)
+        )
+    }
+    }
 
